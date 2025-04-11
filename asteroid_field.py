@@ -11,7 +11,8 @@ from constants import (
     ASTEROID_SPAWN_RATE,
     ASTEROID_MIN_SPEED,
     ASTEROID_MAX_SPEED,
-    ASTEROID_SPAWN_ANGLE,
+    ASTEROID_MIN_SPAWN_ANGLE, 
+    ASTEROID_MAX_SPAWN_ANGLE,
     ASTEROID_KINDS,
 )
 
@@ -56,5 +57,6 @@ class AsteroidField(pygame.sprite.Sprite):
             radius = random.randint(1, ASTEROID_KINDS) * ASTEROID_MIN_RADIUS
             speed = random.randint(ASTEROID_MIN_SPEED, ASTEROID_MAX_SPEED)
             velocity = edge[0] * speed
-            velocity = velocity.rotate(random.randint(-ASTEROID_SPAWN_ANGLE, ASTEROID_SPAWN_ANGLE))
+            angle = random.randint(ASTEROID_MIN_SPAWN_ANGLE, ASTEROID_MAX_SPAWN_ANGLE)
+            velocity = velocity.rotate(angle)
             self.spawn(position, radius, velocity)
