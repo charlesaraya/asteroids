@@ -1,7 +1,13 @@
-from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOOTING_SPEED
 import pygame
+
+from circleshape import CircleShape
 from bullet import Bullet
+from constants import (
+    PLAYER_RADIUS,
+    PLAYER_TURN_SPEED,
+    PLAYER_SPEED,
+    PLAYER_SHOOTING_SPEED
+)
 
 class Player(CircleShape):
 
