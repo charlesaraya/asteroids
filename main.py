@@ -11,6 +11,12 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
+    # Create groups
+    drawable = pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
+    # Assign groups
+    Player.containers = (drawable, updatable)
+
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     while(True):
         for event in pygame.event.get():
@@ -18,8 +24,9 @@ def main():
                 return
         screen.fill("white")
 
-        player.draw(screen)
-        player.update(dt)
+        for thing in drawable:
+            thing.draw(screen)
+        updatable.update(dt)
 
         pygame.display.flip()
 
