@@ -28,8 +28,7 @@ class Asteroid(CircleShape):
         if self.kind == 1:
             self.kill()
             return
-        new_kind = self.kind - 1
-        new_radius = new_kind * ASTEROID_MIN_RADIUS
+        new_radius = (self.kind - 1) * ASTEROID_MIN_RADIUS
         asteroid_one = Asteroid(self.position.x, self.position.y, new_radius)
         asteroid_two = Asteroid(self.position.x, self.position.y, new_radius)
         angle = random.uniform(ASTEROID_MIN_SPAWN_ANGLE, ASTEROID_MAX_SPAWN_ANGLE)
