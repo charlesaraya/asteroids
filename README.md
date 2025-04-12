@@ -8,14 +8,10 @@ A classic Asteroids-style arcade game built from scratch using pygame. Blast you
  - Bullets destroy small asteroids
  - Large asteroids split into two smaller ones
 - Basic physics for movement and bullet firing
-
-## Requirements
-- Python 3.10+
-- pygame (pip install pygame)
-
-## Upcoming Features
 - Asteroids split and break apart when hit
 - Add a scoring system
+
+## Upcoming Features
 - Implement multiple lives and player respawning
 - Add explosion effects when asteroids are destroyed
 - Add acceleration to player movement
@@ -26,3 +22,7 @@ A classic Asteroids-style arcade game built from scratch using pygame. Blast you
 - Give the ship a triangular hitbox instead of a circular one
 - Add a shield power-up
 - Add a speed power-up
+
+## Requirements
+- Python 3.10+
+- pygame (pip install pygame)
