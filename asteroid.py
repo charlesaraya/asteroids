@@ -16,7 +16,6 @@ class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
         super().__init__(x, y, radius)
         self.kind = self.radius // ASTEROID_MIN_RADIUS
-        self.score = self.kind * ASTEROID_BASE_SCORE
 
     def draw(self, screen):
         return pygame.draw.circle(screen, "black", self.position, self.radius, 2)

@@ -50,10 +50,9 @@ def main():
                 sys.exit()
             for bullet in bullets:
                 if bullet.collision(asteroid):
-                    score.update(asteroid.score)
+                    score.update(asteroid)
                     asteroid.split()
                     bullet.kill()
-
 
         pygame.display.flip()
 
