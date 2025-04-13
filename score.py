@@ -10,14 +10,14 @@ class Score(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.font = pygame.font.SysFont('monospace', 24)
         self.current_score = 0
-        self.text = 'Score: 0'
+        self.scoring = f"Score: {self.current_score}"
         self.player_lifes = 0
 
     def draw(self, screen, show_hitbox=False):
-        text_surface = self.font.render(self.text, True, (0, 0, 0))
-        text_rect = text_surface.get_rect()
-        text_rect.topleft = (50, 50)
-        screen.blit(text_surface, text_rect)
+        scoring_text_surface = self.font.render(self.scoring, True, (0, 0, 0))
+        scoring_text_rect = scoring_text_surface.get_rect()
+        scoring_text_rect.topleft = (50, 50)
+        screen.blit(scoring_text_surface, scoring_text_rect)
 
         player_lifes_text_surface = self.font.render(self.player_lifes, True, (0, 0, 0))
         player_lifes_text_rect = player_lifes_text_surface.get_rect()
