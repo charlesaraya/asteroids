@@ -8,14 +8,18 @@ from constants import (
     PLAYER_SPEED,
     PLAYER_SHOOTING_SPEED,
     PLAYER_RELOAD_RATE,
+    PLAYER_LIFES,
+    PLAYER_HIT_TIMER,
 )
 
 class Player(CircleShape):
 
-    def __init__(self, x, y, radius = PLAYER_RADIUS):
+    def __init__(self, x, y, radius = PLAYER_RADIUS, lifes=PLAYER_LIFES):
         super().__init__(x, y, radius)
         self.rotation = 0
         self.reload_timer = PLAYER_RELOAD_RATE
+        self.hit_timer = PLAYER_HIT_TIMER
+        self.lifes = lifes
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -26,9 +30,12 @@ class Player(CircleShape):
         return a, b, c
 
     def draw(self, screen, show_hitbox=False):
+        ship_polygon = pygame.draw.polygon(screen, "black", self.triangle(), 2)
         if show_hitbox:
             pygame.draw.circle(screen, "red", self.position, self.radius, 2)
-        return pygame.draw.polygon(screen, "black", self.triangle(), 2)
+        if self.hit_timer <= PLAYER_HIT_TIMER:
+            ship_polygon = pygame.draw.polygon(screen, "red", self.triangle(), 2)
+        return ship_polygon
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -48,6 +55,7 @@ class Player(CircleShape):
             self.shoot(dt)
 
         self.reload_timer += dt
+        self.hit_timer += dt
 
         return keys
 
@@ -59,3 +67,9 @@ class Player(CircleShape):
             self.reload_timer = 0
             bullet_speed = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOTING_SPEED
             Bullet(self.position.x, self.position.y, bullet_speed)
+
+    def hit(self):
+        if self.hit_timer >= PLAYER_HIT_TIMER:
+            self.hit_timer = 0
+            self.lifes -= 1
+        return self.lifes

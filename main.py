@@ -33,6 +33,7 @@ def main():
 
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     score = Score()
+    score.update_lifes(player.lifes)
     AsteroidField()
 
     while(True):
@@ -46,8 +47,10 @@ def main():
         updatable.update(dt)
         for asteroid in asteroids:
             if player.collision(asteroid):
-                print("Game Over!")
-                sys.exit()
+                score.update_lifes(player.lifes)
+                if player.hit() == 0:
+                    print("Game Over!")
+                    sys.exit()
             for bullet in bullets:
                 if bullet.collision(asteroid):
                     score.update(asteroid)
