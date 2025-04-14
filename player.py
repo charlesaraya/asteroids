@@ -48,7 +48,17 @@ class Player(CircleShape):
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
 
+    def ticker(self, dt):
+        self.reload_timer += dt
+        self.hit_timer += dt
+        self.blinking_timer += dt
+
+    
+
     def update(self, dt):
+
+        self.ticker(dt)
+
         # Set Key bindings
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
@@ -61,11 +71,6 @@ class Player(CircleShape):
             self.move(-dt)
         if keys[pygame.K_SPACE]:
             self.shoot(dt)
-
-        # Set timers
-        self.reload_timer += dt
-        self.hit_timer += dt
-        self.blinking_timer += dt
 
         # Invulnerability Period
         if self.hit_timer >= PLAYER_HIT_TIMER:
