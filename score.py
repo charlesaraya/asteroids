@@ -1,17 +1,21 @@
 import pygame
 
 from asteroid import Asteroid
+from player import Player
 
 from core.constants import ASTEROID_KINDS, ASTEROID_BASE_SCORE
 
 class Score(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, player):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.font = pygame.font.SysFont('monospace', 24)
+        self.reset_score(player)
+
+    def reset_score(self, player):
         self.current_score = 0
         self.scoring = f"Score: {self.current_score}"
-        self.player_lifes = 0
+        self.player_lifes = f"Lifes: {player.lifes}"
 
     def draw(self, screen, show_hitbox=False):
         scoring_text_surface = self.font.render(self.scoring, True, (0, 0, 0))
@@ -25,12 +29,9 @@ class Score(pygame.sprite.Sprite):
         screen.blit(player_lifes_text_surface, player_lifes_text_rect)
 
     def update(self, thing):
-        score = 0
         if isinstance(thing, Asteroid):
-            score = (ASTEROID_KINDS - thing.kind + 1) * ASTEROID_BASE_SCORE
+            self.current_score += (ASTEROID_KINDS - thing.kind + 1) * ASTEROID_BASE_SCORE
+            self.scoring = f"Score: {self.current_score}"
 
-        self.current_score += score
-        self.scoring = f"Score: {self.current_score}"
-
-    def update_lifes(self, lifes):
-        self.player_lifes = f"Lifes: {lifes}"
+        if isinstance(thing, Player):
+            self.player_lifes = f"Lifes: {thing.lifes}"

@@ -2,17 +2,16 @@
 A classic Asteroids-style arcade game built from scratch using pygame. Blast your way through waves of asteroids spawning from the screen edges. Large asteroids split into smaller fragments when hit, and the smallest ones are destroyed in a satisfying chain of explosions.
 
 ## 🎮 Features
-- Player-controlled ship that can rotate and shoot
+- Player-controlled ship that can rotate, move and fire bullets
 - Asteroids spawn from screen edges and drift across space
 - Collision mechanics:
  - Bullets destroy small asteroids
- - Large asteroids split into two smaller ones
-- Basic physics for movement and bullet firing
-- Asteroids split and break apart when hit
-- Simple scoring system
+ - Large asteroids split into two smaller ones when hit by a bullet
+- Simple scoring system tracks asteroid hits and lifes left.
+- UI for Main menu and Game Over menu.
 
 ## Upcoming Features
-- Implement multiple lives and player respawning
+- Implement player respawning
 - Add explosion effects when asteroids are destroyed
 - Add acceleration to player movement
 - Implement screen wrap-around for all objects
@@ -25,4 +24,4 @@ A classic Asteroids-style arcade game built from scratch using pygame. Blast you
 
 ## Requirements
 - Python 3.10+
-- pygame (pip install pygame)
+- pygame
