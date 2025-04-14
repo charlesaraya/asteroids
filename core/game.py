@@ -10,6 +10,7 @@ from asteroid import Asteroid
 from asteroid_field import AsteroidField
 from bullet import Bullet
 from score import Score
+from ui.huds.hud_score import ScoreHUD
 
 from ui.menu import Menu
 
@@ -38,18 +39,19 @@ class Game:
         Asteroid.containers = (self.drawable, self.updatable, self.asteroids)
         AsteroidField.containers = (self.updatable)
         Bullet.containers = (self.drawable, self.updatable, self.bullets)
-        Score.containers = (self.drawable)
+        ScoreHUD.containers = (self.drawable, self.updatable)
 
     def start_game(self):
         self.state = GameState.PLAYING
         self.asteroid_field = AsteroidField()
         self.player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
         self.score = Score(self.player)
+        self.hud_score = ScoreHUD(self.score)
 
     def flush_game(self):
         self.asteroid_field.kill()
         self.player.kill()
-        self.score.kill()
+        self.hud_score.kill()
         for asteroid in self.asteroids:
             asteroid.kill()
         for bullet in self.bullets:
