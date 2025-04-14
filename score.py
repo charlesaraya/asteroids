@@ -30,7 +30,7 @@ class Score(pygame.sprite.Sprite):
             score = (ASTEROID_KINDS - thing.kind + 1) * ASTEROID_BASE_SCORE
 
         self.current_score += score
-        self.text = f"Score: {self.current_score}"
+        self.scoring = f"Score: {self.current_score}"
 
     def update_lifes(self, lifes):
         self.player_lifes = f"Lifes: {lifes}"
