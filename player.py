@@ -10,6 +10,7 @@ from constants import (
     PLAYER_RELOAD_RATE,
     PLAYER_LIFES,
     PLAYER_HIT_TIMER,
+    BLINKING_TIMER,
 )
 
 class Player(CircleShape):
@@ -19,6 +20,9 @@ class Player(CircleShape):
         self.rotation = 0
         self.reload_timer = PLAYER_RELOAD_RATE
         self.hit_timer = PLAYER_HIT_TIMER
+        self.blinking_timer = BLINKING_TIMER
+        self.blink = False
+        self.invulnerable = False
         self.lifes = lifes
 
     def triangle(self):
@@ -33,16 +37,20 @@ class Player(CircleShape):
         ship_polygon = pygame.draw.polygon(screen, "black", self.triangle(), 2)
         if show_hitbox:
             pygame.draw.circle(screen, "red", self.position, self.radius, 2)
-        if self.hit_timer <= PLAYER_HIT_TIMER:
-            ship_polygon = pygame.draw.polygon(screen, "red", self.triangle(), 2)
+
+        if self.invulnerable:
+            if self.blink:
+                ship_polygon = pygame.draw.polygon(screen, "red", self.triangle(), 2)
+            else:
+                ship_polygon = pygame.draw.polygon(screen, "black", self.triangle(), 2)
         return ship_polygon
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
 
     def update(self, dt):
+        # Set Key bindings
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_a]:
             self.rotate(-dt)
         if keys[pygame.K_d]:
@@ -54,9 +62,25 @@ class Player(CircleShape):
         if keys[pygame.K_SPACE]:
             self.shoot(dt)
 
+        # Set timers
         self.reload_timer += dt
         self.hit_timer += dt
+        self.blinking_timer += dt
 
+        # Invulnerability Period
+        if self.hit_timer >= PLAYER_HIT_TIMER:
+            self.invulnerable = False
+        # Blink while invulnerable
+        if self.invulnerable:
+            print(self.blink)
+            if self.blinking_timer <= BLINKING_TIMER and not self.blink:
+                self.blink = True
+            elif self.blinking_timer >= BLINKING_TIMER and self.blink:
+                self.blink = False
+            elif self.blinking_timer >= BLINKING_TIMER * 2:
+                self.blinking_timer = 0
+        else:
+            self.blink = False
         return keys
 
     def move(self, dt):
@@ -71,5 +95,6 @@ class Player(CircleShape):
     def hit(self):
         if self.hit_timer >= PLAYER_HIT_TIMER:
             self.hit_timer = 0
+            self.invulnerable = True
             self.lifes -= 1
         return self.lifes
