@@ -1,7 +1,7 @@
 import pygame
 
 from circleshape import CircleShape
-from constants import BULLET_RADIUS
+from core.constants import BULLET_RADIUS
 
 class Bullet(CircleShape):
 

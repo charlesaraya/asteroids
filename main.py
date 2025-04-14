@@ -2,7 +2,7 @@ import sys
 
 import pygame
 
-from constants import *
+from core.constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroid_field import AsteroidField

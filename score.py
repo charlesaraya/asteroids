@@ -2,7 +2,7 @@ import pygame
 
 from asteroid import Asteroid
 
-from constants import ASTEROID_KINDS, ASTEROID_BASE_SCORE
+from core.constants import ASTEROID_KINDS, ASTEROID_BASE_SCORE
 
 class Score(pygame.sprite.Sprite):
 

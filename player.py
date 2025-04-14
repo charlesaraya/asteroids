@@ -2,7 +2,7 @@ import pygame
 
 from circleshape import CircleShape
 from bullet import Bullet
-from constants import (
+from core.constants import (
     PLAYER_RADIUS,
     PLAYER_TURN_SPEED,
     PLAYER_SPEED,
@@ -77,7 +77,6 @@ class Player(CircleShape):
             self.invulnerable = False
         # Blink while invulnerable
         if self.invulnerable:
-            print(self.blink)
             if self.blinking_timer <= BLINKING_TIMER and not self.blink:
                 self.blink = True
             elif self.blinking_timer >= BLINKING_TIMER and self.blink:

@@ -3,7 +3,7 @@ import random
 import pygame
 
 from asteroid import Asteroid
-from constants import (
+from core.constants import (
     ASTEROID_MIN_RADIUS,
     ASTEROID_MAX_RADIUS,
     SCREEN_HEIGHT,

@@ -3,7 +3,7 @@ import random
 import pygame
 
 from circleshape import CircleShape
-from constants import (
+from core.constants import (
     ASTEROID_MIN_RADIUS,
     ASTEROID_MIN_SPAWN_ANGLE,
     ASTEROID_MAX_SPAWN_ANGLE,
