@@ -3,6 +3,8 @@ import sys
 import pygame
 
 from .constants import (SCREEN_WIDTH, SCREEN_HEIGHT, FPS, MILLISECONDS)
+from .state import GameState
+
 from player import Player
 from asteroid import Asteroid
 from asteroid_field import AsteroidField
@@ -12,6 +14,8 @@ from score import Score
 class Game:
 
     def __init__(self):
+        self.running = True
+        self.state = GameState.PLAYING
         self.clock = pygame.time.Clock()
         self.dt = 0
 
@@ -39,7 +43,7 @@ class Game:
         AsteroidField()
 
     def run(self):
-        while(True):
+        while(self.running):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
